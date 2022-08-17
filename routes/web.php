@@ -23,6 +23,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/short_links', [ShortLinkController::class, 'index'])->name('short-links');
-Route::get('{code}', [ShortLinkController::class, 'show'])->name('shorten.link');
+Route::get('/s/{code}', [ShortLinkController::class, 'show'])->name('shorten.link');
 
 require __DIR__.'/auth.php';
