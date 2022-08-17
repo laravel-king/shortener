@@ -13,4 +13,11 @@ class ShortLinkController extends Controller
 
         return view('shortLink.index', compact('links'));
     }
+
+    public function show($code)
+    {
+        $find = ShortLink::where('code', $code)->first();
+
+        return redirect($find->link);
+    }
 }

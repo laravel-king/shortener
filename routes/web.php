@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShortLinkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/short_links', [ShortLinkController::class, 'index'])->name('short-links');
+Route::get('{code}', [ShortLinkController::class, 'show'])->name('shorten.link');
 
 require __DIR__.'/auth.php';
