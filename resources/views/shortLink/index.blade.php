@@ -8,6 +8,7 @@
             <th class="py-3 px-6 text-left">ID</th>
             <th class="py-3 px-6 text-left">Short Link</th>
             <th class="py-3 px-6 text-left">Link</th>
+            <th class="py-3 px-6 text-left">Action</th>
         </tr>
         </thead>
         <tbody class="text-gray-600 text-sm font-light">
@@ -20,6 +21,13 @@
                 <td class="py-3 px-6 text-left whitespace-nowrap">{{ $link->id }}</td>
                 <td class="py-3 px-6 text-left font-semibold whitespace-nowrap"><a href="{{ route('shorten.link', $link->code) }}" target="_blank">{{ route('shorten.link', $link->code) }}</a></td>
                 <td class="py-3 px-6 text-left whitespace-nowrap">{{ $link->link }}</td>
+                <td class="py-3 px-6 text-left whitespace-nowrap">
+                    <form method="post" action="{{ route('link.delete', $link->id) }}">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>

@@ -24,5 +24,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/short_links', [ShortLinkController::class, 'index'])->name('short-links');
 Route::get('/s/{code}', [ShortLinkController::class, 'show'])->name('shorten.link');
+Route::delete('/{link}/delete',[ShortLinkController::class, 'delete'])->name('link.delete');
 
 require __DIR__.'/auth.php';

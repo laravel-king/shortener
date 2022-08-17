@@ -20,4 +20,10 @@ class ShortLinkController extends Controller
 
         return redirect($find->link);
     }
+
+    public function delete(ShortLink $link)
+    {
+        $link->delete();
+        return redirect()->route('short-links');
+    }
 }
