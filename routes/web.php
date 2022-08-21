@@ -18,12 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    Route::get('/short_links', [ShortLinkController::class, 'index'])->name('short-links');
+    Route::delete('/{link}/delete',[ShortLinkController::class, 'delete'])->name('link.delete');
+});
 
-Route::get('/short_links', [ShortLinkController::class, 'index'])->name('short-links');
+
 Route::get('/s/{code}', [ShortLinkController::class, 'show'])->name('shorten.link');
-Route::delete('/{link}/delete',[ShortLinkController::class, 'delete'])->name('link.delete');
+
 
 require __DIR__.'/auth.php';
