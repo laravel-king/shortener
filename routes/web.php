@@ -22,7 +22,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/short_links', [ShortLinkController::class, 'index'])->name('short-links');
+    Route::get('/short_links', [ShortLinkController::class, 'index'])->name('link.index');
+    Route::get('/short_links/create',[ShortLinkController::class, 'create'])->name('link.create');
+    Route::post('/short_links/store',[ShortLinkController::class, 'store'])->name('link.store');
     Route::delete('/{link}/delete',[ShortLinkController::class, 'delete'])->name('link.delete');
 });
 

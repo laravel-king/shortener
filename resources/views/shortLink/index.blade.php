@@ -2,12 +2,23 @@
 <x-slot name="header">
 </x-slot>
 
-    <div class="py-12">
+    @if(Session::has('success'))
+        <div class="mt-8 p-2 mx-auto space-x-8 items-center flex w-1/2 bg-green-50 text-green-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checkbox text-green-600 h-6 w-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <polyline points="9 11 12 14 20 6" />
+                <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
+            </svg>
+            <p>{{ Session::get('success') }}</p>
+        </div>
+    @endif
+
+    <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="mb-4 text-right">
-                        <a href="#" class="px-3 py-2 rounded-sm bg-green-300 text-green-800 text-sm font-bold">Add new URL</a>
+                        <a href="{{ route('link.create') }}" class="px-3 py-2 rounded-sm bg-green-300 text-green-800 text-sm font-bold">Add new URL</a>
                     </div>
                     <table class="w-full table-auto">
                         <thead>

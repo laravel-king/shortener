@@ -11,7 +11,7 @@ class ShortLink extends Model
 {
     use HasFactory;
 
-    protected $fillable=['code', 'link'];
+    protected $fillable=['code', 'link', 'user_id'];
 
     public function user(): BelongsTo
     {

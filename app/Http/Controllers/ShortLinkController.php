@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ShortLink;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ShortLinkController extends Controller
 {
@@ -18,9 +19,20 @@ class ShortLinkController extends Controller
         return view('shortLink.create');
     }
 
-    public function save()
+    public function store(Request $request)
     {
+        $request->validate([
+            'link' => 'required|url'
+        ]);
 
+        $input['link'] = $request->link;
+        $input['code'] = Str::random(4);
+        $input['user_id'] = auth()->id();
+
+        ShortLink::create($input);
+
+        return redirect()->route('link.index')
+            ->with('success', 'Shorten Link Generated Successfully!');
     }
 
     public function show($code)
