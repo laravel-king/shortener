@@ -22,7 +22,7 @@
                         @forelse ($users as $user)
                             <tr class="border-b border-gray-200 bg-gray-100 hover:bg-white duration-200 ease-in-out transform">
                                 <td class="py-3 px-6 text-left whitespace-nowrap">{{ $user->id }}</td>
-                                <td class="py-3 px-6 text-left font-semibold whitespace-nowrap"><a href="#" target="_blank">{{ $user->name }}</a></td>
+                                <td class="py-3 px-6 text-left font-semibold whitespace-nowrap"><a href="{{ route('users.edit',$user->id) }}" target="_blank">{{ $user->name }}</a></td>
                                 <td class="py-3 px-6 text-left whitespace-nowrap">{{ $user->email }}</td>
                                 <td class="py-3 px-6 flex justify-center space-x-4 items-center text-left whitespace-nowrap">
                                     <form method="post" action="{{ route('users.destroy', $user->id) }}">
@@ -30,7 +30,7 @@
                                         @csrf
                                         <button type="submit" class="bg-red-300 text-red-800 text-xs p-1 rounded-sm font-bold">Delete</button>
                                     </form>
-                                    <a href="#" class="p-1 rounded-sm bg-blue-300 text-blue-800 text-xs font-bold">Edit</a>
+                                    <a href="{{ route('users.edit',$user->id) }}" class="p-1 rounded-sm bg-blue-300 text-blue-800 text-xs font-bold">Edit</a>
                                 </td>
                             </tr>
                         @empty

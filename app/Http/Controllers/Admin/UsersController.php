@@ -6,6 +6,8 @@ use Gate;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -32,37 +34,39 @@ class UsersController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(User $user)
     {
-        //
+        return view('Admin.Users.edit',compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|max:100',
+            'email' => 'required|email|max:250',
+            'password' => 'sometimes|nullable|min:6|max:100'
+        ]);
+
+
+        $user_update = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+
+        if (!empty($request->password))
+            $user_update['password'] = Hash::make($request['password']);
+
+        $user->update($user_update);
+
+        return redirect()->route('users.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        
+        return redirect()->route('users.index');
     }
 }

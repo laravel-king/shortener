@@ -16,11 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 @if(Gate::allows('manage-users'))
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                         {{ __('Users') }}
                     </x-nav-link>
                     @endif
-                    <x-nav-link :href="route('link.index')" :active="request()->routeIs('link.index')">
+                    <x-nav-link :href="route('link.index')" :active="request()->routeIs('link.*')">
                         {{ __('Links') }}
                     </x-nav-link>
                 </div>
@@ -74,10 +74,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+            @if(Gate::allows('manage-users'))
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                 {{ __('Users') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('link.index')" :active="request()->routeIs('link.index')">
+            @endif
+            <x-responsive-nav-link :href="route('link.index')" :active="request()->routeIs('link.*')">
                 {{ __('Links') }}
             </x-responsive-nav-link>
         </div>
