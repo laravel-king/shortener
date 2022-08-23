@@ -6,7 +6,6 @@ use Gate;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -23,15 +22,9 @@ class UsersController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $user)
     {
-        //
+        return response()->noContent($user);
     }
 
 
@@ -66,7 +59,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        
+
         return redirect()->route('users.index');
     }
 }
