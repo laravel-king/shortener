@@ -19,7 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('admin/users', UsersController::class,['except' => ['create', 'store']]);
+//Route::resource('admin/users', UsersController::class,['except' => ['create', 'store']]);
+
+Route::prefix('admin')->middleware('auth:sanctum')->group(function (){
+    Route::resource('/users',UsersController::class,['except' => ['create', 'store']]);
+});
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/dashboard', function () {

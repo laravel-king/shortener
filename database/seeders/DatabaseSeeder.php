@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        ShortLink::factory(10)->create();
+        //ShortLink::factory(10)->create();
+        $this->call(RolesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
