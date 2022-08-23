@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\ShortLinkController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('admin/users', UsersController::class,['except' => ['create', 'store']]);
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/dashboard', function () {
